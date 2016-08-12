@@ -1,12 +1,12 @@
 package big01;
 
 /**
- * Клсс FigureFactory отвечает за создание объектов-фигурок.
+ * FigureFactory class is responsible for creating objects - figures .
  */
 public class FigureFactory
 {
     /**
-     * Набор из шести шаблонов для фигурок
+     * Set of six templates for figures
      */
     public static final int[][][] BRICKS = {{
             {1, 1, 0},                          //   X X
@@ -35,7 +35,7 @@ public class FigureFactory
     };
 
     /**
-     * Метод выбирает случайный шаблон и создает с ним новую фигурку.
+     * The method selects a random pattern and creates with it a new figure .
      */
     public static Figure createRandomFigure(int x,int y)
     {
