@@ -2,13 +2,13 @@ package big01;
 
 
 /**
- * Класс Figure описывает фигурку тетриса
+ * Class Figure describes the figure of Tetris
  */
 public class Figure
 {
-    //метрица которая определяет форму фигурки: 1 - клетка не пустая, 0 - пустая
+    //metritsa which determines the shape of the figures : 1 - not an empty cell , 0 - empty
     private int[][] matrix;
-    //координаты
+    //coordinates
     private int x;
     private int y;
 
@@ -35,8 +35,8 @@ public class Figure
     }
 
     /**
-     * Поворачаиваем фигурку.
-     * Для простоты - просто вокруг главной диагонали.
+     * turn figure .
+     * For the sake of simplicity - just around the main diagonal 
      */
     public void rotate()
     {
@@ -54,8 +54,8 @@ public class Figure
     }
 
     /**
-     * Двигаем фигурку влево.
-     * Проверяем не вылезла ли она за границу поля и/или не залезла ли на занятые клетки.
+     * Move the figure to the left.
+     * Check to see if she got out of bounds and / or climbed on whether occupied cells .
      */
     public void left()
     {
@@ -76,8 +76,8 @@ public class Figure
     }
 
     /**
-     * Двигаем фигурку вверх.
-     * Используется, если фигурка залезла на занятые клетки.
+     * Move the figure up.
+     * Used if the figure had climbed to the occupied cells .
      */
     public void up()
     {
@@ -85,7 +85,7 @@ public class Figure
     }
 
     /**
-     * Двигаем фигурку вниз.
+     * Move figure down.
      */
     public void down()
     {
@@ -93,7 +93,7 @@ public class Figure
     }
 
     /**
-     * Двигаем фигурку вниз до тех пор, пока не залезем на кого-нибудь.
+     * Move figure down until until it climbed up on someone.
      */
     public void downMaximum()
     {
@@ -106,9 +106,7 @@ public class Figure
     }
 
     /**
-     * Проверяем - может ли фигурка находится на текущей позици:
-     * а) не вылазиет ли она за границы поля
-     * б) не залазиет ли она на занятые клетки
+     * Check - whether the figure can be located at the current position
      */
     public boolean isCurrentPositionAvailable()
     {
@@ -134,7 +132,7 @@ public class Figure
     }
 
     /**
-     * Приземляем фигурку - добавляем все ее непустые клетки к клеткам поля.
+     * Landing figure - add all of its non-empty cells to the cells of the field .
      */
     public void landed()
     {
