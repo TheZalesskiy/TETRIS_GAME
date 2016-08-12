@@ -3,15 +3,15 @@ package big01;
 import java.util.ArrayList;
 
 /**
- * Класс Field описывает "поле клеток" игры Тетрис
+ * Class Field describes the " field cells " of Tetris game
  */
 public class Field
 {
-    //ширина и высота
+    //width and height
     private int width;
     private int height;
 
-    //матрица поля: 1 - клетка занята, 0 - свободна
+    //field matrix : 1 - the cell is occupied , 0 - free
     private int[][] matrix;
 
     public Field(int width, int height)
@@ -37,8 +37,8 @@ public class Field
     }
 
     /**
-     * Метод возвращает значение, которое содержится в матрице с координатами (x,y)
-     * Если координаты за пределами матрицы, метод возвращает null.
+     * The method returns the value that is contained in the matrix with coordinates (x, y)
+     * If the coordinates are outside the matrix , the method returns null.
      */
     public Integer getValue(int x, int y)
     {
@@ -49,7 +49,7 @@ public class Field
     }
 
     /**
-     *  Метод устанавливает переданное значение(value) в ячейку матрицы с координатами (x,y)
+     *  The method sets the passed value (value) in a cell matrix with coordinates (x, y)
      */
     public void setValue(int x, int y, int value)
     {
@@ -58,14 +58,14 @@ public class Field
     }
 
     /**
-     * Метод печатает на экран текущее содержание матрицы
+     * The method prints to the screen the current contents of the matrix
      */
     public void print()
     {
-        //Создаем массив, куда будем "рисовать" текущее состояние игры
+        //We create an array , which will "draw" the current state of the game
         int[][] canvas = new int[height][width];
 
-        //Копируем "матрицу поля" в массив
+        //Copy " field matrix " in the array
         for (int i = 0; i < height; i++)
         {
             for (int j = 0; j < width; j++)
@@ -74,7 +74,7 @@ public class Field
             }
         }
 
-        //Копируем фигурку в массив, только непустые клетки
+        //Copy the figure in an array , only the non-empty cells
         int left = Tetris.game.getFigure().getX();
         int top = Tetris.game.getFigure().getY();
         int[][] brickMatrix = Tetris.game.getFigure().getMatrix();
@@ -90,7 +90,7 @@ public class Field
         }
 
 
-        //Выводим "нарисованное" на экран, но начинаем с "границы кадра".
+        //Prints " painted " on the screen , but start with a " frame boundaries " .
         System.out.println("---------------------------------------------------------------------------\n");
 
         for (int i = 0; i < height; i++)
@@ -116,35 +116,35 @@ public class Field
     }
 
     /**
-     * Удаляем заполненные линии
+     * Remove the fill line
      */
     public void removeFullLines()
     {
-        //Создаем список для хранения линий
+        //Create a list of storage lines
         ArrayList<int[]> lines = new ArrayList<int[]>();
 
-        //Копируем все непустые линии в список.
+        //Copy all non-empty line in the list.
         for (int i = 0; i <height; i++)
         {
-            //подсчитываем количество единиц в строке - просто суммируем все ее значения
+            //count the number of units in a row - just summarize all of its values
             int count = 0;
             for (int j = 0; j < width; j++)
             {
                 count += matrix[i][j];
             }
 
-            //Если сумма строки не равно ее ширине - добавляем в список
+            //If the line amount is not equal to its width - adding to the list
             if (count != width)
                 lines.add(0,matrix[i]);
         }
 
-        //Добавляем недостающие строки в начало списка.
+        //Add the missing lines in the top of the list .
         while (lines.size()<height)
         {
             lines.add(0,new int[width]);
         }
 
-        //Преобразуем список обратно в матрицу
+        //Transform the list back to the matrix
         matrix = lines.toArray(new int[height][width]);
     }
 }
