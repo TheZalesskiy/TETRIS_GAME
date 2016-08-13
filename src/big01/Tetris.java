@@ -3,15 +3,15 @@ package big01;
 import java.awt.event.KeyEvent;
 
 /**
- *  Класс Tetris - содержит основной функционал игры.
+ *  Tetris class - It contains the basic functionality of the game.
  */
 public class Tetris
 {
 
-    private Field field;                //Поле с клетками
-    private Figure figure;              //Фигурка
+    private Field field;                //The field with the cells
+    private Figure figure;              //Figure
 
-    private boolean isGameOver;         //Игра Окончена?
+    private boolean isGameOver;         //game over?
 
     public Tetris(int width, int height)
     {
@@ -20,7 +20,7 @@ public class Tetris
     }
 
     /**
-     * Геттер переменной field.
+     * Getter variable field.
      */
     public Field getField()
     {
@@ -28,7 +28,7 @@ public class Tetris
     }
 
     /**
-     * Геттер переменной figure.
+     * Getter variable figure.
      */
     public Figure getFigure()
     {
@@ -36,74 +36,74 @@ public class Tetris
     }
 
     /**
-     *  Основной цикл программы.
-     *  Тут происходят все важные действия
+     *  The main program loop.
+      * It's all important actions occur
      */
     public void run() throws Exception
     {
-        //Создаем объект "наблюдатель за клавиатурой" и стартуем его.
+        //Create an object "observer of the keyboard" and we start it.
         KeyboardObserver keyboardObserver = new KeyboardObserver();
         keyboardObserver.start();
 
-        //выставляем начальное значение переменной "игра окончена" в ЛОЖЬ
+        //We put out the initial value of the variable "game over" FALSE
         isGameOver = false;
-        //создаем первую фигурку посередине сверху: x - половина ширины, y - 0.
+        //create the first figure from the top in the middle: x - width half, y - 0.
         figure = FigureFactory.createRandomFigure(field.getWidth() / 2, 0);
 
-        //пока игра не окончена
+        //until the game is over
         while (!isGameOver)
         {
-            //"наблюдатель" содержит события о нажатии клавиш?
+            //"Observer" contains events keystrokes?
             if (keyboardObserver.hasKeyEvents())
             {
-                //получить самое первое событие из очереди
+                //get the first event from the queue
                 KeyEvent event = keyboardObserver.getEventFromTop();
-                //Если равно символу 'q' - выйти из игры.
+                //If the same character 'q' - out of the game.
                 if (event.getKeyChar() == 'q') return;
-                //Если "стрелка влево" - сдвинуть фигурку влево
+                //If the "left arrow" - move the figure to the left
                 if (event.getKeyCode() == KeyEvent.VK_LEFT)
                     figure.left();
-                //Если "стрелка вправо" - сдвинуть фигурку вправо
+                //If the "right arrow" - move the figure to the right
                 else if (event.getKeyCode() ==  KeyEvent.VK_RIGHT)
                     figure.right();
-                //Если  код клавиши равен 12 ("цифра 5 на доп. клавиатуре") - повернуть фигурку
+                //If the key code is 12 ("number 5 on the additional keyboard.") - Turn figure
                 else if (event.getKeyCode() ==  12)
                     figure.rotate();
-                //Если "пробел" - фигурка падает вниз на максимум
+                //If the "gap" - figure drops down to max
                 else if (event.getKeyCode() ==  KeyEvent.VK_SPACE)
                     figure.downMaximum();
             }
 
-            step();             //делаем очередной шаг
-            field.print();      //печатаем состояние "поля"
-            Thread.sleep(300);  //пауза 300 миллисекунд - 1/3 секунды
+            step();             //move next step
+            field.print();      //print condition "field"
+            Thread.sleep(300);  //pause 300 ml
         }
 
-        //Выводим сообщение "Game Over"
+        //write message "Game Over"
         System.out.println("Game Over");
     }
 
     public void step()
     {
-        //опускам фигурку вниз
+        //the figure down
         figure.down();
 
-        //если разместить фигурку на текущем месте невозможно
+        // If you put a figure on the current site can not be
         if (!figure.isCurrentPositionAvailable())
         {
-            figure.up();                    //поднимаем обратно
-            figure.landed();                //приземляем
+            figure.up();                    //raising back
+            figure.landed();                //land
 
-            isGameOver = figure.getY() <= 1;//если фигурка приземлилась на самом верху - игра окончена
+            isGameOver = figure.getY() <= 1;//if the figure landed at the top - the game is over
 
-            field.removeFullLines();        //удаляем заполненные линии
+            field.removeFullLines();        //remove the fill line
 
-            figure = FigureFactory.createRandomFigure(field.getWidth() / 2, 0); //создаем новую фигурку
+            figure = FigureFactory.createRandomFigure(field.getWidth() / 2, 0); //create new figure
         }
     }
 
     /**
-     * Сеттер для figure
+     * Setter for figure
      */
     public void setFigure(Figure figure)
     {
@@ -111,7 +111,7 @@ public class Tetris
     }
 
     /**
-     * Сеттер для field
+     * Setter for field
      */
     public void setField(Field field)
     {
