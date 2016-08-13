@@ -1,6 +1,3 @@
-package big01;
-
-
 /**
  * Class Figure describes the figure of Tetris
  */

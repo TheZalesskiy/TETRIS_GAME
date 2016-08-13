@@ -1,5 +1,3 @@
-package big01;
-
 import java.util.ArrayList;
 
 /**
@@ -99,7 +97,7 @@ public class Field
             {
                 int index = canvas[i][j];
                 if (index == 0)
-                    System.out.print(" . ");
+                    System.out.print(" ");
                 else if (index == 1)
                     System.out.print(" X ");
                 else if (index == 2)

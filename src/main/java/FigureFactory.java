@@ -1,4 +1,4 @@
-package big01;
+
 
 /**
  * FigureFactory class is responsible for creating objects - figures .
